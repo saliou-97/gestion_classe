@@ -9,6 +9,8 @@ module.exports=function(sequelize,Sequelize){
         poste:{
             type:Sequelize.STRING,
             allowNull:false
-        }
+        },
+        
     })
+    return Agent;
 }

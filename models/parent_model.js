@@ -7,9 +7,10 @@ module.exports=function(sequelize,Sequelize){
             allowNull: false,
         },
         statut:{
-            type:Sequelize.String,
+            type:Sequelize.STRING,
             allowNull:false
         },
         
     })
+    return Parent
 }

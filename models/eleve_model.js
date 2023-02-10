@@ -15,4 +15,5 @@ module.exports=function(sequelize,Sequelize){
             defaultValue:"NON"
         }
     })
+    return Eleve
 }

@@ -1,4 +1,4 @@
-const { HasMany } = require('sequelize')
+const { BelongsToMany } = require('sequelize')
 const database=require('../database/db_auto_academie.js')
 const sequelize=database.sequelize
 const Sequelize=database.Sequelize
@@ -18,17 +18,17 @@ db.matiere=require("./matiere_model.js")(sequelize,Sequelize)
 
 
 
-db.filiere,hasMany(db.classe,{foreignkey:"id_filiere"})
+db.filiere.hasMany(db.classe,{foreignkey:"id_filiere"})
 db.classe.belongsTo(db.filiere,{foreignkey:"id_filiere"})
 
 db.classe.hasMany(db.eleve,{foreignkey:"id_classe"})
 db.eleve.belongsTo(db.classe,{foreignkey:"id_classe"})
 
-db.classe.hasMany(db.prof,{foreignkey:"id_classe"})
-db.prof.hasMany(db.classe,{foreignkey:"id_prof"})
+db.classe.belongsToMany(db.prof,{through: "Classe_Prof"})
+db.prof.belongsToMany(db.classe,{through:"Classe_Prof"})
 
-db.filiere,hasMany(db.matiere,{foreignkey:"id_filiere"})
-db.matiere.hasMany(db.filiere,{foreignkey:"id_matiere"})
+db.filiere.belongsToMany(db.matiere,{through: "Matiere_Filiere"})
+db.matiere.belongsToMany(db.filiere,{through: "Matiere_Filiere"})
 
 
 db.users.hasOne(db.eleve,{foreignkey:'id_eleve'})
