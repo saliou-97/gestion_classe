@@ -1,0 +1,18 @@
+module.exports=function(sequelize,Sequelize){
+    const Eleve=sequelize.define("eleve",{
+        id:{
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
+        stituation:{
+            type:Sequelize.STRING,
+            allowNull:false
+        },
+        rebouble:{
+            type:Sequelize.ENUM("OUI","NON"),
+            defaultValue:"NON"
+        }
+    })
+}
