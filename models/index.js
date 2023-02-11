@@ -15,6 +15,9 @@ db.agent=require("./agent_model.js")(sequelize,Sequelize)
 db.classe=require("./classe_model.js")(sequelize,Sequelize)
 db.filiere=require("./filiere_model.js")(sequelize,Sequelize)
 db.matiere=require("./matiere_model.js")(sequelize,Sequelize)
+db.depense=require("./depence_model.js")(sequelize,Sequelize)
+db.paiement=require("./paiement_model")(sequelize,Sequelize)
+db.note=require("./note_model.js")(sequelize,Sequelize)
 
 
 
@@ -27,9 +30,20 @@ db.eleve.belongsTo(db.classe,{foreignkey:"id_classe"})
 db.classe.belongsToMany(db.prof,{through: "Classe_Prof"})
 db.prof.belongsToMany(db.classe,{through:"Classe_Prof"})
 
-db.filiere.belongsToMany(db.matiere,{through: "Matiere_Filiere"})
-db.matiere.belongsToMany(db.filiere,{through: "Matiere_Filiere"})
+db.filiere.belongsToMany(db.matiere,{through: "matiere_filiere"})
+db.matiere.belongsToMany(db.filiere,{through: "matiere_filiere"})
 
+db.agent.hasMany(db.depense,{foreignkey:"id_agent"})
+db.depense.belongsTo(db.agent,{foreignkey:"id_agent"})
+
+db.agent.hasMany(db.paiement,{foreignkey:"id_agent"})
+db.paiement.belongsTo(db.agent,{foreignkey:"id_agent"})
+
+db.prof.hasMany(db.note,{foreignkey:"id_prof"})
+db.note.belongsTo(db.prof,{foreignkey:"id_prof"})
+
+db.eleve.hasMany(db.note,{foreignkey:"id_eleve"})
+db.note.belongsTo(db.eleve,{foreignkey:"id_eleve"})
 
 db.users.hasOne(db.eleve,{foreignkey:'id_eleve'})
 db.eleve.belongsTo(db.users,{foreignkey:"id_eleve"})

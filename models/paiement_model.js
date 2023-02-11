@@ -15,7 +15,7 @@ module.exports=function(sequelize,Sequelize) {
             allowNull:false
         },
         date_paiement:{
-            type:Sequelize.Date,
+            type:Sequelize.DATE,
             allowNull:false
         }
     })
