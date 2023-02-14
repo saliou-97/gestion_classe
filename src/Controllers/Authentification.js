@@ -26,7 +26,7 @@ module.exports = {
          )
           iduser=user.id
           console.log(iduser)
-            const message = `L'utilisateur a été connecté avec succès2`;
+            const message = `L'utilisateur a été connecté avec succès`;
            
            const islogin='true';
             return res.status(200).json({ message, data: user,token,islogin })
@@ -37,4 +37,43 @@ module.exports = {
             return res.json({message,data:error})
          })
     },
+    createUser(req, res) {
+      bcrypt.hash(req.body.password,10)
+      .then(hash=>User.create({
+        email:req.body.email,
+        prenom:req.body.prenom,  
+        genre:req.body.genre,
+        nom:req.body.nom,
+        adresse:req.body.adresse,
+        date_naissance:req.body.date_naissance,
+        lieu_naissance:req.body.lieu_naissance,
+        nationalite:req.body.nationalite,
+        situation_matrimoniale:req.body.situation_matrimoniale,
+        groupe_sanguine:req.body.groupe_sanguine,
+        telephone:req.body.telephone,
+        situation_professionel:req.body.situation_professionel,
+        password:hash
+  
+      })
+      .then(result=>{
+        if(result!=null){
+        erreur=false
+         message="Utilisateur Inscrit avec Succées"
+         return res.json({erreur,message,data:result})
+        }
+        else{
+          message='Impossible d_enregistrer l_utilisateur'
+          res.json({message})
+        }
+  
+      })
+      .catch(erreur=>{
+        message='Impossible d_enregistrer l_utilisateur'
+        res.json({message,data:erreur})
+  
+      })
+      )
+  },
+  
+
 }
