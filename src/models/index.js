@@ -43,7 +43,7 @@ db.parent.belongsTo(db.users,{foreignkey:"id_parent"})
 db.users.hasOne(db.agent,{foreignkey:'id_agent'})
 db.agent.belongsTo(db.users,{foreignkey:"id_agent"})
 const initDb = () => {
-    return  db.sequelize.sync(/*{force: true}*/)
+    return  db.sequelize.sync({force: true})
       .then(() => {
        
         
