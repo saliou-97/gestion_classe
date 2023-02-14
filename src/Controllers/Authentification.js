@@ -87,7 +87,31 @@ module.exports = {
 
      
   },
-  
+  updateUser(req,res){
+    const id = req.params.id;
+    User.findByPk(id).then(user => {
+      if(user===null){
+        const message='l_utilisateur que vous voulez modifier n_existe pas'
+        return res.status(404).json({message})
+      }
+      user.update(req.body, {
+        where: { id: id }
+      })
+      .then(_=>{
+        message=`l_utilisateur ${user.prenom} a bien été modifie le voici aprés la modification`
+        User.findByPk(id).then(usermodif=>{
+          return res.status(201).json({message,data:usermodif})
+        })
+       
+      })
+    })
+    .catch(error=>{
+      message="Veuillez essayer plus tard"
+      res.status(501).json({data:error,message})
+    })
+
+  }
+
 
 
 }
