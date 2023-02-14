@@ -1,18 +1,15 @@
 module.exports=function(sequelize,Sequelize){
-    const Eleve=sequelize.define("eleve",{
+    const Prof=sequelize.define("professeur",{
         id:{
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
-        stituation:{
+        statut_professionel:{
             type:Sequelize.STRING,
             allowNull:false
-        },
-        rebouble:{
-            type:Sequelize.ENUM("OUI","NON"),
-            defaultValue:"NON"
         }
     })
+    return Prof;
 }

@@ -1,14 +1,19 @@
 module.exports=function(sequelize,Sequelize){
-    const Agent=sequelize.define("agent",{
+    const Eleve=sequelize.define("eleve",{
         id:{
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
-        poste:{
+        stituation:{
             type:Sequelize.STRING,
             allowNull:false
+        },
+        rebouble:{
+            type:Sequelize.ENUM("OUI","NON"),
+            defaultValue:"NON"
         }
     })
+    return Eleve;
 }

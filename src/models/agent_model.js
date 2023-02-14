@@ -1,15 +1,15 @@
 module.exports=function(sequelize,Sequelize){
-    const Parent=sequelize.define("parent",{
+    const Agent=sequelize.define("agent",{
         id:{
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
-        statut:{
-            type:Sequelize.String,
+        poste:{
+            type:Sequelize.STRING,
             allowNull:false
-        },
-        
+        }
     })
+    return Agent;
 }

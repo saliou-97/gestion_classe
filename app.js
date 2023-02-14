@@ -2,16 +2,21 @@ const  express = require( 'express');
 const  bodyparser = require ( "body-parser" ) ;
 const env=require("dotenv").config();
 const app=express();
-const  db = require ( "./models/index.js" )
+const morgan=require('morgan')
+const bodyParser=require('body-parser')
+const  db = require ( "./src/models/index" )
 
 
-db.sequelize.sync(/*{force: true}*/)
-  .then(() => {
-    console.log("Base de données bien synchronisée.");
-  })
-  .catch((err) => {
-    console.log("Echec lors de la synchronisation: " + err.message);
-  });
+const rout = require('./Route/routers');
+app
+.use(morgan('dev'))
+.use(bodyParser.json())
+
+/*  fonction qui gére la création des tables * */
+//db.initDb();
+
+
+
 
 
 
@@ -20,3 +25,6 @@ const Port=process.env.PORT;
 app.listen ( Port , ( ) => {
     console.log ( 'le serveur est demarre ' +Port)
 } )
+//app.use('/', AuteurController);
+app.use('/api/v1',rout);
+
