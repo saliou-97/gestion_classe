@@ -38,42 +38,56 @@ module.exports = {
          })
     },
     createUser(req, res) {
-      bcrypt.hash(req.body.password,10)
-      .then(hash=>User.create({
-        email:req.body.email,
-        prenom:req.body.prenom,  
-        genre:req.body.genre,
-        nom:req.body.nom,
-        adresse:req.body.adresse,
-        date_naissance:req.body.date_naissance,
-        lieu_naissance:req.body.lieu_naissance,
-        nationalite:req.body.nationalite,
-        situation_matrimoniale:req.body.situation_matrimoniale,
-        groupe_sanguine:req.body.groupe_sanguine,
-        telephone:req.body.telephone,
-        situation_professionel:req.body.situation_professionel,
-        password:hash
-  
+      User.findOne({ where: { email: req.body.email } }).then(user => {
+        if(!user){
+          bcrypt.hash(req.body.password,10)
+          .then(
+            hash=>User.create({
+            email:req.body.email,
+            prenom:req.body.prenom,  
+            genre:req.body.genre,
+            nom:req.body.nom,
+            adresse:req.body.adresse,
+            date_naissance:req.body.date_naissance,
+            lieu_naissance:req.body.lieu_naissance,
+            nationalite:req.body.nationalite,
+            situation_matrimoniale:req.body.situation_matrimoniale,
+            groupe_sanguine:req.body.groupe_sanguine,
+            telephone:req.body.telephone,
+            situation_professionel:req.body.situation_professionel,
+            password:hash
+      
+          })
+          .then(result=>{
+            if(result!=null){
+            erreur=false
+             message="Utilisateur Inscrit avec Succées"
+             return res.json({erreur,message,data:result})
+            }
+            else{
+              message='Impossible d_enregistrer l_utilisateur'
+              res.json({message})
+            }
+      
+          })
+          .catch(erreur=>{
+            message='Impossible d_enregistrer l_utilisateur'
+            res.json({message,data:erreur})
+      
+          })
+          )
+          
+          }
+          else{
+            const message='l_utilisateur que vous voulez inscrire a déja une compte'
+            return res.status(404).json({message})
+          }
+
       })
-      .then(result=>{
-        if(result!=null){
-        erreur=false
-         message="Utilisateur Inscrit avec Succées"
-         return res.json({erreur,message,data:result})
-        }
-        else{
-          message='Impossible d_enregistrer l_utilisateur'
-          res.json({message})
-        }
-  
-      })
-      .catch(erreur=>{
-        message='Impossible d_enregistrer l_utilisateur'
-        res.json({message,data:erreur})
-  
-      })
-      )
+
+     
   },
   
+
 
 }
