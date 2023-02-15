@@ -27,8 +27,8 @@ db.classe.belongsTo(db.filiere,{foreignkey:"id_filiere"})
 db.classe.hasMany(db.eleve,{foreignkey:"id_classe"})
 db.eleve.belongsTo(db.classe,{foreignkey:"id_classe"})
 
-db.classe.belongsToMany(db.prof,{through: "Classe_Prof"})
-db.prof.belongsToMany(db.classe,{through:"Classe_Prof"})
+db.classe.belongsToMany(db.prof,{through: "classe_prof"})
+db.prof.belongsToMany(db.classe,{through:"classe_prof"})
 
 db.filiere.belongsToMany(db.matiere,{through: "matiere_filiere"})
 db.matiere.belongsToMany(db.filiere,{through: "matiere_filiere"})

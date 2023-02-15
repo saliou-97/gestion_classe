@@ -6,6 +6,11 @@ module.exports=function(sequelize,Sequelize){
             autoIncrement: true,
             allowNull: false,
         },
+        code:{
+            type:Sequelize.INTEGER,
+            allowNull:false,
+            
+        },
         stituation:{
             type:Sequelize.STRING,
             allowNull:false
