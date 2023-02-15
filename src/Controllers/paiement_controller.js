@@ -1,5 +1,5 @@
 const db=require("./../models/index.js")
-const Paiement=db.paiement;
+const Paiement=db.db.paiement;
 
 module.exports={
     createPaiement(req, res) {

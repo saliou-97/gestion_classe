@@ -1,8 +1,8 @@
-const { BelongsToMany } = require('sequelize')
+const { HasMany } = require('sequelize')
 const database=require('../database/db_auto_academie.js')
 const sequelize=database.sequelize
 const Sequelize=database.Sequelize
-
+const bcrypt=require('bcrypt')
 const db={}
 db.sequelize=sequelize
 db.Sequelize=Sequelize
@@ -18,7 +18,7 @@ db.matiere=require("./matiere_model.js")(sequelize,Sequelize)
 db.depense=require("./depence_model.js")(sequelize,Sequelize)
 db.paiement=require("./paiement_model")(sequelize,Sequelize)
 db.note=require("./note_model.js")(sequelize,Sequelize)
-
+const User=db.users
 
 
 db.filiere.hasMany(db.classe,{foreignkey:"id_filiere"})
@@ -56,5 +56,36 @@ db.parent.belongsTo(db.users,{foreignkey:"id_parent"})
 
 db.users.hasOne(db.agent,{foreignkey:'id_agent'})
 db.agent.belongsTo(db.users,{foreignkey:"id_agent"})
+const initDb = () => {
+    return  db.sequelize.sync({force: true})
+      .then(() => {
+       
+        
+          bcrypt.hash('admin2023',10)
+    .then(hash=>db.users.create({
+      email:'admin@gmail.com',
+      prenom:"Mohamadou Moustapha",  
+      genre:'H',
+      nom:"Traore",
+      adresse:"Parcelle U2",
+      date_naissance:"2023-02-14 13:42:28.000000",
+      lieu_naissance:"Mbour",
+      nationalite:"Sénégalais",
+      situation_matrimoniale:"celibataire",
+      groupe_sanguine:"O+",
+      telephone:"785260388",
+      situation_professionel:"étudiant",
+      password:hash
+    })
+    .then(user=>console.log(user.toJSON()))
 
-module.exports=db;
+    )
+        console.log("Base de données bien synchronisée.");
+      })
+      .catch((err) => {
+        console.log("Echec lors de la synchronisation: " + err.message);
+      });
+
+}
+
+module.exports={db,initDb,User};

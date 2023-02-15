@@ -1,5 +1,5 @@
 const db=require("./../models/index.js")
-const Depense=db.depense;
+const Depense=db.db.depense;
 
 module.exports={
     createDepense(req, res) {

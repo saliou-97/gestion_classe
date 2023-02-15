@@ -1,7 +1,7 @@
 const db=require("./../models/index.js")
 const readXlsxFile = require("read-excel-file/node");
 const excel=require("exceljs")
-const Note=db.note;
+const Note=db.db.note;
 
 module.exports={
     createNote(req, res) {
