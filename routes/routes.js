@@ -8,6 +8,9 @@ routes.post('/login', Authentification.Login);
 routes.post('/createUser',Authentification.createUser);
 routes.put('/updateUser/:id',Authentification.updateUser);
 
+const User=require("./../src/Controllers/user_controller.js")
+routes.post("/creereleve",User.creereleve)
+
 const Depense=require("../src/Controllers/depences_controller.js")
 
 routes.get('/depense/', Depense.getAllDepense);

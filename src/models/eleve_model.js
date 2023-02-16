@@ -6,12 +6,15 @@ module.exports=function(sequelize,Sequelize){
             autoIncrement: true,
             allowNull: false,
         },
-        code:{
+        code_permanent:{
             type:Sequelize.INTEGER,
             allowNull:false,
             
         },
-        stituation:{
+        image:{
+            type:Sequelize.STRING
+        },
+        situation:{
             type:Sequelize.STRING,
             allowNull:false
         },

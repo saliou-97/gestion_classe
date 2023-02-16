@@ -33,7 +33,7 @@ module.exports = {
           })
         })
          .catch(error=>{
-            const message='l_utilisateur n_a pas pu etre connecte avec succes'
+            const message='l_utilisateur n a pas pu etre connecte avec succes'
             return res.json({message,data:error})
          })
     },
