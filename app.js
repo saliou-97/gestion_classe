@@ -13,7 +13,7 @@ app
 .use(bodyParser.json())
 
 /*  fonction qui gére la création des tables * */
-//db.initDb();
+db.initDb();
 
 
 global.__basedir = __dirname + "/";
