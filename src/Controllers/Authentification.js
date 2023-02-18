@@ -38,6 +38,7 @@ module.exports = {
          })
     },
     createUser(req, res) {
+      
       User.findOne({ where: { email: req.body.email } }).then(user => {
         if(!user){
           bcrypt.hash(req.body.password,10)

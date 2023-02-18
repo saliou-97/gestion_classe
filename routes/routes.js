@@ -5,11 +5,11 @@ const routes = express.Router();
 //const routes = express.Router();
 const Authentification = require('./../src/Controllers/Authentification');
 routes.post('/login', Authentification.Login);
-routes.post('/createUser',Authentification.createUser);
+//routes.post('/createUser',Authentification.createUser);
 routes.put('/updateUser/:id',Authentification.updateUser);
 
 const User=require("./../src/Controllers/user_controller.js")
-routes.post("/creereleve",User.creereleve)
+routes.post("/createUser/:id",User.createUser)
 
 const Depense=require("../src/Controllers/depences_controller.js")
 

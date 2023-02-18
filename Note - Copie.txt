@@ -1,4 +1,0 @@
-  Authentification:
-  npm i bcrypt //pour le cryptage
-npm i jsonwebtoken//pour le token
-npm i morgan//pour voir les requétes
