@@ -23,7 +23,8 @@ module.exports={
     async getFiliereByID(req, res){
         const id = req.params.id;
         res.status(200).json(await Filiere.findOne({id:req.params.id}));
-    },
+    },*
+    
     deleteFiliere(req, res) {
         const id = req.params.id;
         Filiere.destroy({where: {id: id }})

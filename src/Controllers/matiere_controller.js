@@ -15,7 +15,7 @@ module.exports={
         const MatiereUpdated =  await Matiere.update(req.body, {where: {id: id}});
         res.status(201).json(MatiereUpdated);
     },
-    getAllMatiere(req, res) {
+    getAllMatiere(res) {
         Matiere.findAll()
         .then(function(matiere){res.status(200).json(matiere)})
         .catch(function(error){res.status(500).json(error)});
